@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                   _password =_value;
                 });
               },
-              regEx: r".{8,}",
+              regEx: r".{6,}",
               hintText: 'Password',
               obscureText: true,
             ),

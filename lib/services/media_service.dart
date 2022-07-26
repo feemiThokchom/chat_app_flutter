@@ -1,13 +1,14 @@
 import 'package:file_picker/file_picker.dart';
 
 class MediaService {
-
-  MediaService(){}
+  MediaService();
 
   Future<PlatformFile?> pickImageFromLibrary() async {
-    FilePickerResult? _results = await FilePicker.platform.pickFiles(type: FileType.image);
-    if(_results != null) {
-      return _results.files[0];
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(type: FileType.image);
+    if (result != null) {
+    return result.files[0];
+
     }
     return null;
   }

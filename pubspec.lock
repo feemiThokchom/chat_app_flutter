@@ -84,14 +84,14 @@ packages:
       name: ffi
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.1"
+    version: "2.0.1"
   file_picker:
     dependency: "direct main"
     description:
       name: file_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.6.1"
+    version: "5.0.0"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -377,7 +377,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.1"
+    version: "2.7.0"
 sdks:
   dart: ">=2.17.3 <3.0.0"
   flutter: ">=2.8.0"

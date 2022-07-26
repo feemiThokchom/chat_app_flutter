@@ -1,10 +1,11 @@
-import 'package:chat_app_flutter/providers/authentication_provider.dart';
+//packages
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 //Pages
-
-
+import '../pages/chats_page.dart';
+import '../providers/authentication_provider.dart';
+import '../pages/users_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,6 +15,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List<Widget> _pages = [
+    ChatsPages(),
+    UsersPage(),
+
+  ];
+
+  int _currentPage = 0;
 
   late AuthenticationProvider _auth;
 
@@ -24,15 +32,27 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildUI() {
-
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            _auth.logOut();
-          },
-          child: Text('Log Out'),
-        ),
+
+        body: _pages[_currentPage],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentPage,
+        onTap: (_index){
+          setState((){
+            _currentPage = _index;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            label: 'Chats',
+            icon: Icon(Icons.chat_bubble),
+          ),
+          BottomNavigationBarItem(
+            label: 'Users',
+            icon: Icon(Icons.supervised_user_circle_sharp),
+          ),
+
+        ],
       ),
     );
   }

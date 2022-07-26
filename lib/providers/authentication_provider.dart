@@ -28,17 +28,18 @@ class AuthenticationProvider extends ChangeNotifier {
         _databaseServices.updateUserLastSeen(_user.uid);
         _databaseServices.getUser(_user.uid).then(
               (_snapshot) {
-            Map<String, dynamic> _userData = _snapshot.data()! as Map<
-                String,
-                dynamic>;
-            user = ChatUser.fromJson({
-              "uid": _user.uid,
-              "name": _userData["name"],
-              "email": _userData["email"],
-              "last_active": _userData["last_active"],
-              "image": _userData["image"],
-            });
-            _navigationServices.removeAndNavigateToRoute('/home');
+                if(_snapshot.exists) {
+              Map<String, dynamic> userData =
+                  _snapshot.data() as Map<String, dynamic>;
+              user = ChatUser.fromJson({
+                "uid": _user.uid,
+                "name": userData["name"],
+                "email": userData["email"],
+                "last_active": userData["last_active"],
+                "image": userData["image"],
+              });
+              _navigationServices.removeAndNavigateToRoute('/home');
+            }
           },
         );
       } else {
@@ -47,11 +48,11 @@ class AuthenticationProvider extends ChangeNotifier {
     });
   }
 
-  Future<void> loginUsingEmailAndPassword(String _email,
-      String _password) async {
+  Future<void> loginUsingEmailAndPassword(String email,
+      String password) async {
     try {
       await _auth.signInWithEmailAndPassword(
-          email: _email, password: _password);
+          email: email, password: password);
       print(_auth.currentUser);
     } on FirebaseAuthException {
       print("Error logging user into Firebase");
@@ -60,12 +61,24 @@ class AuthenticationProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> logOut() async {
+  Future<String?> registerUserUsingEmailAndPassword(String email,
+      String password) async {
     try {
-      await _auth.signOut();
-    }catch (e) {
+      UserCredential credentials = await _auth.createUserWithEmailAndPassword(
+        email: email, password: password,);
+      return credentials.user!.uid;
+    } on FirebaseAuthException{
+      print("Error in registering user.");
+    }catch (e){
       print(e);
     }
   }
 
+  Future<void> logOut() async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      print(e);
+    }
+  }
 }
