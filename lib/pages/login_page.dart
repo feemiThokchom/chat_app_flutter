@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
               },
               regEx: r".{6,}",
               hintText: 'Password',
-              obscureText: true,
+              obscureText: false,
             ),
           ],
         ),

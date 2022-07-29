@@ -19,6 +19,7 @@ class ChatMessage {
     required this.sentTime,
   });
 
+  //take a json document and return chat message instance form it
   factory ChatMessage.fromJSON(Map<String, dynamic> _json) {
     MessageType _messageType;
     switch (_json["type"]) {
@@ -39,6 +40,7 @@ class ChatMessage {
     );
   }
 
+  //return a json representation of our chat message
   Map<String, dynamic> toJson() {
     String _messageType;
     switch (type) {

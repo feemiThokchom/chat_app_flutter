@@ -23,6 +23,7 @@ class TopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
+
     return _buildUI();
   }
 

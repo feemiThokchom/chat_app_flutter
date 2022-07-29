@@ -31,7 +31,7 @@ class AuthenticationProvider extends ChangeNotifier {
                 if(_snapshot.exists) {
               Map<String, dynamic> userData =
                   _snapshot.data() as Map<String, dynamic>;
-              user = ChatUser.fromJson({
+              user = ChatUser.fromJSON({
                 "uid": _user.uid,
                 "name": userData["name"],
                 "email": userData["email"],
